@@ -8,6 +8,8 @@ import friend7 from "../assets/friend7.jpg";
 import friend8 from "../assets/friend8.jpg";
 import friend9 from "../assets/friend9.jpg";
 
+
+
 export const period_month = 30 * 24 * 60 * 60 * 1000;
 export const base_url = 'https://sw-info-api.herokuapp.com'
 export const friends = [friend1, friend2, friend3, friend4, friend5, friend6, friend7, friend8, friend9];
@@ -34,5 +36,3 @@ theatrical live action "anthology" films Rogue One (2016) and Solo (2018),
 the combined box office revenue of the films equate to over US$10 billion, 
 making Star Wars the third-highest-grossing film franchise in cinematic history.`;
 
-
-export const Hero_Info = ``
