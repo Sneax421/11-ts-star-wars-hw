@@ -1,4 +1,3 @@
-
 import {Route, Routes} from "react-router";
 import {navItems} from "../utils/constants.ts";
 import Home from "./Home.tsx";
@@ -7,17 +6,20 @@ import StarWars from "./StarWars.tsx";
 import Contact from "./Contact.tsx";
 import ErrorPage from "./ErrorPage.tsx";
 
-const Main = () => {
+
+
+const Main = ({setHeroName}: { setHeroName: (name: string) => void }) => {
 
 
     return (
         <Routes>
-            {['/',navItems[0].path].map(path => <Route key={path} path={path} element={<Home/>}/> )}
-            {/*<Route path={'/'} element={<Home/>}/>*/}
-            {/*<Route path={navItems[0].path} element={<Home/>}/>*/}
+            {['/', navItems[0].path].map(path =>
+                <Route key={path} path={path} element={<Home/>}/>)}
+
             {[navItems[1].path, `${navItems[1].path}/:heroId`].map(path =>
-                <Route key={path} path={path} element={<AboutMe/>}/>)}
-            {/*<Route path={navItems[1].path} element={<AboutMe/>}/>*/}
+                <Route key={path} path={path} element={<AboutMe setHeroName={setHeroName}/>}/>)}
+            <Route path={navItems[1].path} element={<AboutMe setHeroName={setHeroName}/>}/>
+
             <Route path={navItems[2].path} element={<StarWars/>}/>
             <Route path={navItems[3].path} element={<Contact/>}/>
             <Route path={'*'} element={<ErrorPage/>}/>

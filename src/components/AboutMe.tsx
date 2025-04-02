@@ -44,7 +44,7 @@ import {useEffect, useState} from "react";
 import {HeroInfo} from "../utils/types";
 import {useParams} from "react-router";
 
-const AboutMe = () => {
+const AboutMe = ({ setHeroName }: { setHeroName: (name: string) => void }) => {
     const [hero, setHero] = useState<HeroInfo>();
     let {heroId = defaultHero} = useParams();
 
@@ -84,9 +84,14 @@ const AboutMe = () => {
         if(!characters[heroId]){
             heroId = defaultHero;
         }
-        const hero = JSON.parse(localStorage.getItem(heroId)!);
-        if (hero && ((Date.now() - hero.timestamp) < period_month)) {
-            setHero(hero.payload);
+        const storedHero = localStorage.getItem(heroId);
+        if (storedHero) {
+            const heroData = JSON.parse(storedHero);
+            if ((Date.now() - heroData.timestamp) < period_month) {
+                setHero(heroData.payload);
+                setHeroName(heroData.payload.name); // 🔥 Меняем заголовок
+                return;
+            }
         } else {
             fetch(characters[heroId].url)
                 .then(response => response.json())
@@ -102,6 +107,7 @@ const AboutMe = () => {
                         eye_color: data.eye_color
                     }
                     setHero(info);
+                    setHeroName(info.name);
                     localStorage.setItem(heroId, JSON.stringify({
                         payload: info,
                         timestamp: Date.now()

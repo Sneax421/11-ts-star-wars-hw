@@ -74,6 +74,7 @@ export const characters: Characters = {
 
 export const friends = [friend1, friend2, friend3, friend4, friend5, friend6, friend7, friend8, friend9];
 export const defaultHero = 'luke';
+export const HeaderDefault = 'Luke Skywalker';
 export const navItems: Item[] = [
     {title:'Home', path: 'home'},
     {title:'About Me', path:'about_me'},
