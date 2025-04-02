@@ -1,14 +1,18 @@
-import {useContext} from 'react';
-import {StarWarsContext} from "../utils/context.ts";
+import {NavLink} from "react-router";
+import {Item} from "../utils/types";
+
 
 interface Props {
-    itemTitle: string
+    item: Item
 }
 
-const Navitem = ({itemTitle}: Props) => {
-    const {changePage} = useContext(StarWarsContext);
+const Navitem = ({item}: Props) => {
+
     return (
-        <li onClick={() => changePage(itemTitle)} className="nav-item btn btn-danger mx-1">{itemTitle}</li>
+        <NavLink
+            to={item.path}
+            className="nav-item btn btn-danger mx-1"
+        >{item.title}</NavLink>
     );
 };
 

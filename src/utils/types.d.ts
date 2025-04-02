@@ -16,5 +16,9 @@ export interface HeroInfo {
 
 export interface Planet {
     name: string,
+}
 
+export interface Item {
+    title: string,
+    path: string
 }

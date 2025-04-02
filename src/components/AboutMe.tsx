@@ -117,7 +117,7 @@ const AboutMe = () => {
                     {Object.keys(hero).map(key => <p key={key}>
                         <span className={'display-3'}>{key.replace('_', ' ')}</span>: {hero[key as keyof HeroInfo]}
                     </p>)}
-                    {/*{listInfo(hero)}*/}
+
                 </div>
             }
         </>
