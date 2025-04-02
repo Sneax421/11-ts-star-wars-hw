@@ -89,7 +89,7 @@ const AboutMe = ({ setHeroName }: { setHeroName: (name: string) => void }) => {
             const heroData = JSON.parse(storedHero);
             if ((Date.now() - heroData.timestamp) < period_month) {
                 setHero(heroData.payload);
-                setHeroName(heroData.payload.name); // 🔥 Меняем заголовок
+                setHeroName(heroData.payload.name);
                 return;
             }
         } else {
