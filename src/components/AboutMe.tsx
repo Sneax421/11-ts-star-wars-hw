@@ -102,19 +102,22 @@ const AboutMe = () => {
                 })
         }
 
-    }, [setHero])
+    }, [])
+
+    // const listInfo= (hero: HeroInfo) =>(
+    //     Object.keys(hero).map(key => <p key={key}>
+    //         <span className={'display-3'}>{key.replace('_', ' ')}</span>: {hero[key as keyof HeroInfo]}
+    //     </p>)
+    // )
 
     return (
         <>
             {(!!hero) &&
                 <div className='fs-2 lh-lg text-justify ms-5'>
-                    {
-                        hero.map(([key:string, value: string]) => (
-                            const p = document.createElement('p');
-                            p.append(`${key}: ${value}`);
-                            return p;
-                        ))
-                    }
+                    {Object.keys(hero).map(key => <p key={key}>
+                        <span className={'display-3'}>{key.replace('_', ' ')}</span>: {hero[key as keyof HeroInfo]}
+                    </p>)}
+                    {/*{listInfo(hero)}*/}
                 </div>
             }
         </>
@@ -132,10 +135,6 @@ export default AboutMe;
 // <p><span className='display-3'>hair color:</span> {hero.hair_color}</p>
 // <p><span className='display-3'>skin color:</span> {hero.skin_color}</p>
 // <p><span className='display-3'>eye color:</span> {hero.eye_color}</p>
-
-
-
-
 
 
 // ..
