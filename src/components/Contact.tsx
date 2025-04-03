@@ -1,15 +1,27 @@
-import {useEffect, useState} from 'react';
+import {useContext, useEffect, useState} from 'react';
 
 import '../Contact.css'
-import {base_url} from "../utils/constants.ts";
+import {base_url, characters, defaultHero} from "../utils/constants.ts";
 import {Planet} from "../utils/types";
+import {useParams} from "react-router";
+import {SWContext} from "../utils/context.ts";
 
 const Contact = () => {
     const [planets, setPlanets] = useState(['Loading...'])
 
+    let {heroId = defaultHero} = useParams();
+    const {changeHero} = useContext(SWContext)
+
+    useEffect(() => {
+        if(!characters[heroId]){
+            heroId = defaultHero;
+        }
+        changeHero(heroId);
+    }, []);
+
     async function fetchPlanets() {
         const response = await fetch(`${base_url}/v1/planets`);
-        // const data: {name: string}[] = await response.json();
+
         const data: Planet[] = await response.json();
         const planets = data.map(item => item.name);
         setPlanets(planets);
