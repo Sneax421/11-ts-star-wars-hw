@@ -19,6 +19,7 @@ const Main = () => {
                 <Route key={path} path={path} element={<StarWars/>}/>)}
             {[navItems[3].path, `${navItems[3].path}/:heroId`].map(path =>
                 <Route key={path} path={path} element={<Contact/>}/>)}
+
             <Route path={'*'} element={<ErrorPage/>}/>
         </Routes>
     )
