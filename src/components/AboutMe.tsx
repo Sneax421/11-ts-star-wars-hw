@@ -44,6 +44,10 @@ import {useContext, useEffect, useState} from "react";
 import {HeroInfo} from "../utils/types";
 import {useParams} from "react-router";
 import {SWContext} from "../utils/context.ts";
+import ErrorPage from "./ErrorPage.tsx";
+
+
+
 
 const AboutMe = () => {
     const [hero, setHero] = useState<HeroInfo>();
@@ -83,9 +87,10 @@ const AboutMe = () => {
     //
     // }, [])
     useEffect(() => {
-        if(!characters[heroId]){
+        if (!characters[heroId]) {
             heroId = defaultHero;
         }
+
         changeHero(heroId);
         const hero = JSON.parse(localStorage.getItem(heroId)!);
         if (hero && ((Date.now() - hero.timestamp) < period_month)) {
@@ -114,13 +119,8 @@ const AboutMe = () => {
 
     }, [])
 
-    // const listInfo= (hero: HeroInfo) =>(
-    //     Object.keys(hero).map(key => <p key={key}>
-    //         <span className={'display-3'}>{key.replace('_', ' ')}</span>: {hero[key as keyof HeroInfo]}
-    //     </p>)
-    // )
 
-    return (
+    return characters[heroId]? (
         <>
             {(!!hero) &&
                 <div className='fs-2 lh-lg text-justify ms-5'>
@@ -129,30 +129,16 @@ const AboutMe = () => {
                     </p>)}
 
                 </div>
+
             }
         </>
-    );
+    ) : <ErrorPage />;
 };
 
 export default AboutMe;
 
 
-// <p><span className='display-3'>name:</span> {hero.name}</p>
-// <p><span className='display-3'>gender:</span> {hero.gender}</p>
-// <p><span className='display-3'>birth year:</span> {hero.birth_year}</p>
-// <p><span className='display-3'>height:</span> {hero.height}</p>
-// <p><span className='display-3'>mass:</span> {hero.mass}</p>
-// <p><span className='display-3'>hair color:</span> {hero.hair_color}</p>
-// <p><span className='display-3'>skin color:</span> {hero.skin_color}</p>
-// <p><span className='display-3'>eye color:</span> {hero.eye_color}</p>
 
-
-// ..
-// {Object.entries(hero).map(([key, value]) => (
-//     <p key={key}>
-//         <span className='display-3'>{key.replace('_', ' ')}:</span> {value}
-//     </p>
-// ))}
 
 
 

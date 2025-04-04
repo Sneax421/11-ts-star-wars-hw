@@ -5,6 +5,7 @@ import {base_url, characters, defaultHero} from "../utils/constants.ts";
 import {Planet} from "../utils/types";
 import {useParams} from "react-router";
 import {SWContext} from "../utils/context.ts";
+import ErrorPage from "./ErrorPage.tsx";
 
 const Contact = () => {
     const [planets, setPlanets] = useState(['Loading...'])
@@ -14,10 +15,10 @@ const Contact = () => {
 
     useEffect(() => {
         if(!characters[heroId]){
-            heroId = defaultHero;
+            return
         }
         changeHero(heroId);
-    }, []);
+    }, [heroId]);
 
     async function fetchPlanets() {
         const response = await fetch(`${base_url}/v1/planets`);
@@ -44,7 +45,7 @@ const Contact = () => {
     },[])
 
 
-    return (
+    return characters[heroId]? (
         <form className={'containerContact'} onSubmit={e => e.preventDefault()}>
             <label>First Name
                 <input type="text" name="firstname" placeholder="Your name.."/>
@@ -62,7 +63,7 @@ const Contact = () => {
             </label>
             <button type="submit">Submit</button>
         </form>
-    );
+    ): <ErrorPage/>;
 };
 
 export default Contact;

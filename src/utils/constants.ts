@@ -74,6 +74,7 @@ export const characters: Characters = {
 
 export const friends =  Object.keys(characters);
 export const defaultHero = friends[0];
+export const errorPage: string = 'O-o-ops, something went wrong'
 export const navItems: Item[] = [
     {title:'Home', path: 'home'},
     {title:'About Me', path:'about_me'},
