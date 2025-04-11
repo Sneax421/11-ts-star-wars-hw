@@ -1,24 +1,15 @@
-import {useContext, useEffect, useState} from 'react';
+import {useEffect, useState} from 'react';
 
 import '../Contact.css'
-import {base_url, characters, defaultHero} from "../utils/constants.ts";
+import {base_url} from "../utils/constants.ts";
 import {Planet} from "../utils/types";
-import {useParams} from "react-router";
-import {SWContext} from "../utils/context.ts";
 import ErrorPage from "./ErrorPage.tsx";
+import useHeroId from "../hooks/useHeroId.ts";
 
 const Contact = () => {
     const [planets, setPlanets] = useState(['Loading...'])
 
-    let {heroId = defaultHero} = useParams();
-    const {changeHero} = useContext(SWContext)
-
-    useEffect(() => {
-        if(!characters[heroId]){
-            return
-        }
-        changeHero(heroId);
-    }, [heroId]);
+    const {isValidHero} = useHeroId();
 
     async function fetchPlanets() {
         const response = await fetch(`${base_url}/v1/planets`);
@@ -45,7 +36,7 @@ const Contact = () => {
     },[])
 
 
-    return characters[heroId]? (
+    return isValidHero ? (
         <form className={'containerContact'} onSubmit={e => e.preventDefault()}>
             <label>First Name
                 <input type="text" name="firstname" placeholder="Your name.."/>
